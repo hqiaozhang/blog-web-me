@@ -1,0 +1,25 @@
+.layout_header{
+  height: 64px;
+  padding: 0 12px 0 0;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  position: relative;
+  i.anticon {
+    padding: 22px 24px;
+    font-size: 20px;
+  }
+}
+
+.index-pageHeader{
+  background: #fff;
+  padding: 16px 32px 0 32px;
+  border-bottom: 1px solid #e8e8e8;
+  .ant-breadcrumb {
+    margin-bottom: 16px;
+  }
+  .title_fs20 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+}

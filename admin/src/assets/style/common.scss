@@ -1,0 +1,44 @@
+.main_container {
+  height: 100%;
+  flex-direction: row;
+}
+.index-sider {
+
+}
+.layout_sider {
+  position: fixed;
+  height: 100%;
+  top: 0;
+  left: 0
+}
+.right_layout {
+  position: relative;
+  top: 0;
+  left: 258px;
+  width: calc(100% - 258px);
+  &.left_collapsed {
+    left: 80px;
+    width: calc(100% - 80px);
+  }
+}
+.ant-layout {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  min-height: 0;
+  background: #f0f2f5;
+}
+.index_content {
+  padding: 24px 24px 0;
+  height: 100%;
+}
+.right_content_main {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  transition: 0.3s;
+  .ant-card {
+    height: 100%;
+    padding: 24px;
+  }
+}

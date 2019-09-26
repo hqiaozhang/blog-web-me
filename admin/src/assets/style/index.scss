@@ -1,0 +1,57 @@
+ 
+@import 'reset.scss'; 
+@import 'common.scss'; 
+* {
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: Arial,Helvetica,sans-serif;
+}
+body {
+  font: 400 14px Arial,Helvetica,sans-serif;
+}
+html, body, .router-content, #root {
+  height: 100%;
+}
+.main_app {
+  background: #f0f2f5;
+  float: left;
+  width: 100%;
+}
+a {
+  text-decoration: none;
+}
+.home {
+  text-align: center;
+}
+
+/*滚动条整体样式*/
+::-webkit-scrollbar {
+  width: 4px;
+  height: 6px;
+}
+
+/*滚动条轨道样式*/
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/*滚动条滑块的样式*/
+::-webkit-scrollbar-thumb {
+  background-color: rgba(165,170,178,0.40);
+  border-radius: 3px;
+}
+
+/*滚动条上下按钮的样式*/
+::-webkit-scrollbar-button {
+  background-color: #888;
+  display: none;
+}
+
+/*两个滚动条交叉处的样式*/
+::-webkit-scrollbar-corner {
+  background-color: black;
+}
