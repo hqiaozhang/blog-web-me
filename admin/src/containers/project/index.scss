@@ -1,0 +1,40 @@
+.projects_cardList {
+  margin-top: 12px;
+  .ant-card {
+    padding: 0 !important;
+    a {
+      color: rgba(0,0,0,.85);
+    }
+    .ant-card-meta-title {
+      font-weight: bold;
+    }
+  }
+  .ant-card-meta-description {
+    height: 44px;
+    overflow: hidden;
+    line-height: 22px;
+  }
+  .operation {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 5px 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+    text-align: right;
+    color: #fff;
+    width: 100%;
+    i {
+      margin-right: 20px;
+    }
+  }
+}
+
+.ant-list-grid .ant-list-item {
+  display: block;
+  max-width: 100%;
+  margin-bottom: 16px;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}

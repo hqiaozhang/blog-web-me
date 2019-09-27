@@ -1,4 +1,13 @@
- 
+/*
+ * @Author: zhanghongqiao 
+ * @Date: 2019-09-27 16:35:32 
+ * @Email: 991034150@qq.com 
+ * @Description: 文章管理
+ * @Last Modified by: zhanghongqiao
+ * @Last Modified time: 2019-09-27 16:37:00
+ */
+
+
 const Article = require('../models/article'); 
 const CONSTANT = require('../core/constant')
 const rescode = CONSTANT.RESCODE 
@@ -8,9 +17,7 @@ import {  responseClient } from '../util/util.js';
 exports.getArticleList = (req, res) => {
   Article.find()
     .then(data => {
-      if (data) {
-        //登录成功后设置session
-        req.session.data = data;
+      if (data) { 
         responseClient(res, 200, rescode.success, '成功', data);
       } else {
         responseClient(res, 200, rescode.error, '失败');

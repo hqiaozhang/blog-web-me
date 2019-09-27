@@ -4,7 +4,7 @@
  * @Email: 991034150@qq.com
  * @Description: 用户管理
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-09-26 15:24:34
+ * @Last Modified time: 2019-09-27 13:16:44
  */
 
 // 登录
@@ -22,8 +22,14 @@ const fetchGetFuncMenu = {
   url: '/users/getFuncMenu'
 };
 
+
+const fetchGetConfig = {
+  url: '/users/getConfig'
+};
+
 export {
   fetchLogin,
-  fetchGetFuncMenu
+  fetchGetFuncMenu,
+  fetchGetConfig
 };
 

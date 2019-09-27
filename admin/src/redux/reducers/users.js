@@ -2,7 +2,7 @@
 import * as types from '@/actions/types';
 
 const initialState = {
-  userinfo: {}
+  userinfo: {},
 };
 
 export default function reducer(state = initialState, action = {}) {

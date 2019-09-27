@@ -20,3 +20,7 @@ preLoader.load({
 
 ReactDOM.render(<Root />, document.getElementById('root'));
 
+// ================= 启用热加载=============
+// if (module.hot) {
+//   module.hot.accept();
+// }

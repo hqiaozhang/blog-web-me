@@ -36,22 +36,22 @@ const articleUpdateSuccess = (data) => ({
 });
 
 // 新增文章
-export const rquestAddArticle = (pramas) => dispatch => fetch('fetchArticlesAdd', {...pramas}, (data) => {
+export const rquestAddArticle = (pramas) => dispatch => fetch('fetchArticleAdd', {...pramas}, (data) => {
   dispatch(articleAddSuccess(data));
 });
 
 // 查询文章列表
-export const rquestListArticle = (pramas) => dispatch => fetch('fetchArticlesList', {...pramas}, (data) => {
+export const rquestListArticle = (pramas) => dispatch => fetch('fetchArticleList', {...pramas}, (data) => {
   dispatch(articleListSuccess(data));
 });
 
 
 // 删除文章列表
-export const rquestDelArticle = (pramas) => dispatch => fetch('fetchArticlesDel', {...pramas}, (data) => {
+export const rquestDelArticle = (pramas) => dispatch => fetch('fetchArticleDel', {...pramas}, (data) => {
   dispatch(articleDelSuccess(data));
 });
 
 // 编辑（更新）文章
-export const rquestUpdateArticle = (pramas) => dispatch => fetch('fetchArticlesUpdate', {...pramas}, (data) => {
+export const rquestUpdateArticle = (pramas) => dispatch => fetch('fetchArticleUpdate', {...pramas}, (data) => {
   dispatch(articleUpdateSuccess(data));
 });

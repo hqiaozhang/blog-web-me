@@ -4,9 +4,13 @@
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   position: relative;
-  i.anticon {
+  &>i.anticon {
     padding: 22px 24px;
     font-size: 20px;
+  }
+  .right {
+    float: right;
+    margin-top: 20px;
   }
 }
 
@@ -22,4 +26,5 @@
     font-weight: 500;
     margin-bottom: 16px;
   }
+  
 }

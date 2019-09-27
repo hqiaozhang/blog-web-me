@@ -20,7 +20,13 @@ const projectSchema = new mongoose.Schema({
 	img: { type: String, required: true },
 
 	// 项目链接
-	url: { type: String, required: true },
+	url: { type: String},
+
+	// 项目类别
+	category: { type: String, required: true },
+
+	// 所属公司
+	company: { type: String},
 
 	// 状态 1 是已经完成 ，2 是正在进行，3 是没完成
 	state: { type: Number, default: 1 },

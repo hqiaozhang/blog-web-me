@@ -1,15 +1,19 @@
-'use strict'
-const path = require('path')
-const utils = require('./utils')
-const webpack = require('webpack')
-const config = require('./baseconfig')
-const merge = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.conf')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const ENV = process.env
+
+
+const path = require('path');
+const utils = require('./utils');
+const webpack = require('webpack');
+const config = require('./baseconfig');
+const merge = require('webpack-merge');
+const baseWebpackConfig = require('./webpack.base.conf');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// 复制静态文件
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+const ENV = process.env;
 
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -38,6 +42,14 @@ const webpackConfig = merge(baseWebpackConfig, {
       sourceMap: config.build.productionSourceMap,
       parallel: true
     }),
+    // 复制自定义静态资源
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../static'),
+        to: config.build.assetsSubDirectory,
+        ignore: ['.*']
+      }
+    ]),
     // extract css into its own file
     new ExtractTextWebpackPlugin({
       filename: utils.assetsPath('css/[name].[contenthash].css'),
@@ -51,8 +63,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     // duplicated CSS from different components can be deduped.
     new OptimizeCSSPlugin({
       cssProcessorOptions: config.build.productionSourceMap
-        ? { safe: true, map: { inline: false } }
-        : { safe: true }
+        ? {safe: true, map: {inline: false}}
+        : {safe: true}
     }),
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
@@ -74,15 +86,13 @@ const webpackConfig = merge(baseWebpackConfig, {
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks (module) {
+      minChunks(module) {
         // any required modules inside node_modules are extracted to vendor
         return (
           module.resource &&
           /\.js$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(__dirname, '../node_modules')
-          ) === 0
-        )
+          module.resource.indexOf(path.join(__dirname, '../node_modules')) === 0
+        );
       }
     }),
     // extract webpack runtime and module manifest to its own file in order to
@@ -101,29 +111,25 @@ const webpackConfig = merge(baseWebpackConfig, {
       minChunks: 3
     })
   ]
-})
+});
 
 if (config.build.productionGzip) {
-  const CompressionWebpackPlugin = require('compression-webpack-plugin')
+  const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
-  webpackConfig.plugins.push(
-    new CompressionWebpackPlugin({
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: new RegExp(
-        '\\.(' +
-        config.build.productionGzipExtensions.join('|') +
-        ')$'
-      ),
-      threshold: 10240,
-      minRatio: 0.8
-    })
-  )
+  webpackConfig.plugins.push(new CompressionWebpackPlugin({
+    asset: '[path].gz[query]',
+    algorithm: 'gzip',
+    test: new RegExp(`\\.(${
+      config.build.productionGzipExtensions.join('|')
+    })$`),
+    threshold: 10240,
+    minRatio: 0.8
+  }));
 }
 
 if (config.build.bundleAnalyzerReport || ENV.npm_config_report || ENV.npm_config_a) {
-  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-  webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+  webpackConfig.plugins.push(new BundleAnalyzerPlugin());
 }
 
-module.exports = webpackConfig
+module.exports = webpackConfig;

@@ -20,5 +20,5 @@ const Root = () => (
     </Provider>
   </BrowserRouter>
 );
-
-export default hot(module)(Root);
+export default Root;
+// export default hot(module)(Root);

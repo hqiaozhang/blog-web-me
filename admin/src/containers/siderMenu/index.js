@@ -4,7 +4,7 @@
  * @Email: 991034150@qq.com
  * @Description: 左边导航
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-09-26 17:58:55
+ * @Last Modified time: 2019-09-27 16:51:20
  */
 
 import React, {Component} from 'react';
@@ -13,6 +13,7 @@ import {connect} from 'react-redux';
 import {Menu, Icon, Button} from 'antd';
 import {getUrlParms} from '@/utils/util';
 import {rquestFuncMenu} from '@/actions/users';
+import {isEmpty} from 'lodash';
 import './index.scss';
 
 
@@ -34,24 +35,58 @@ export default class SiderMenu extends Component {
     });
   };
 
+  getActiveMenu(pathname, menus) {
+    menus.map(item => {
+      const path = `${this.props.match.path}/${item.path}`;
+      if (path === pathname && item.name !== '首页') {
+        this.setState({
+          defKey: item.id
+        });
+        this.props.dispatch({type: 'ACTIVEMENU', active: item.name});
+      }
+    });
+  }
+
   componentDidMount() {
     this.props.dispatch(rquestFuncMenu());
+
+    this.props.history.listen(route => {
+      this.getActiveMenu(route.pathname, this.props.menuList);
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.menuList !== this.props.menuList) {
+      this.getActiveMenu(this.props.history.location.pathname, nextProps.menuList);
+    }
   }
 
   /**
    * @description 渲染单个导航菜单
    * @returns
    */
-  renderMenuItem(menus) {
+  renderMenuItem(menus, path) {
     const {match} = this.props;
-    const menuItem = menus.map((d, i) => (
-      <Menu.Item key={d.id} >
-        {/* <Menu.Item key={d.path}> */}
-        <NavLink key={i} to={`${match.path}/${d.path}?auid=${d.id}`}>
-          <Icon type={d.icon} />
-          <span>{d.name}</span>
-        </NavLink>
-      </Menu.Item>
+    const menuItem = menus.map((menu, i) => (
+      isEmpty(menu.childList) ?
+        <Menu.Item key={i} >
+          <NavLink key={menu.id} to={path ? `${match.path}/${path}/${menu.path}` : `${match.path}/${menu.path}`}>
+            {menu.icon ? <Icon type={menu.icon} /> : ''}
+            <span>{menu.name}</span>
+          </NavLink>
+        </Menu.Item>
+        :
+        <SubMenu
+          key={i}
+          title={
+            <span>
+              <Icon type={menu.icon} />
+              <span>{menu.name}</span>
+            </span>
+          }
+        >
+          {this.renderMenuItem(menu.childList, menu.path)}
+        </SubMenu>
     ));
     return menuItem;
   }
@@ -60,48 +95,17 @@ export default class SiderMenu extends Component {
     const {menuList, collapsed} = this.props;
     return (
       <div className="layout_sider" style={{width: collapsed ? 80 : 256}}>
+        <div className="index-logo">
+          <NavLink to="/app"><h1 style={{display: collapsed ? 'none' : 'block'}}>react-blog</h1></NavLink>
+        </div>
+        {/* defaultOpenKeys={[this.state.defKey]}
+          defaultSelectedKeys={[this.state.defKey]} */}
         <Menu
-          defaultSelectedKeys={[this.state.defKey]}
           mode="inline"
           theme="dark"
           inlineCollapsed={collapsed}
         >
           {this.renderMenuItem(menuList)}
-          {/* <Menu.Item key="1">
-            <Icon type="home" />
-            <span>首页</span>
-          </Menu.Item>
-          <Menu.Item key="2">
-            <Icon type="usergroup-add" />
-            <span>用户管理</span>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <Icon type="file-markdown" />
-            <span>文章</span>
-          </Menu.Item>
-          <SubMenu
-            key="sub1"
-            title={
-              <span>
-                <Icon type="mail" />
-                <span>项目</span>
-              </span>
-            }
-          >
-            <Menu.Item key="5">项目列表</Menu.Item>
-          </SubMenu>
-          <SubMenu
-            key="sub2"
-            title={
-              <span>
-                <Icon type="appstore" />
-                <span>异常页</span>
-              </span>
-            }
-          >
-            <Menu.Item key="9">403</Menu.Item>
-            <Menu.Item key="10">404</Menu.Item> */}
-          {/* </SubMenu> */}
         </Menu>
       </div>
     );

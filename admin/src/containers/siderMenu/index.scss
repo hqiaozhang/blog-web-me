@@ -4,3 +4,29 @@
 .ant-menu-item {
   text-align: left;
 }
+.index-logo {
+  height: 64px;
+  position: relative;
+  line-height: 64px;
+  padding-left: 24px;
+  transition: all 0.3s; 
+  overflow: hidden;
+  background: #002140; 
+  a {
+    display: inline-block;
+    line-height: 64px;
+    background: url("./logo.svg") no-repeat left center;
+    background-size: 32px 32px;
+    min-width: 32px; 
+    height: 64px;
+  }
+  h1 {
+    color: white;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 20px;
+    margin: 0 0 0 38px;
+    font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-weight: 600;
+  }
+}

@@ -4,7 +4,7 @@
  * @Email: 991034150@qq.com
  * @Description: 文章列表
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-09-26 13:49:44
+ * @Last Modified time: 2019-09-27 11:31:38
  */
 
 import React, {Component} from 'react';
@@ -214,31 +214,33 @@ export default class ArticlesList extends Component {
       },
     };
     return (
-      <div className="article_list" >
-        <div className="buttons"><Button type="primary" onClick={() => this.showModal()}>新增</Button></div>
-        <Table
-          size="middle"
-          rowKey="id"
-          columns={this.state.columns}
-          dataSource={articleList}
-        />
-        <Modal
-          width="650px"
-          title={!editType ? '新增文章' : '编辑文章'}
-          okText="确认"
-          cancelText="取消"
-          footer={null}
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-        >
-          <WrappedArticleForm
-            visible={this.state.visible}
-            params={this.state.params}
-            onSubmit={this.handleFormSubmit}
-            onCancel={this.handleCancel}
+      <div className="ant-card">
+        <div className="article_list" >
+          <div className="buttons"><Button type="primary" onClick={() => this.showModal()}>新增</Button></div>
+          <Table
+            size="middle"
+            rowKey="id"
+            columns={this.state.columns}
+            dataSource={articleList}
           />
-        </Modal>
+          <Modal
+            width="650px"
+            title={!editType ? '新增文章' : '编辑文章'}
+            okText="确认"
+            cancelText="取消"
+            footer={null}
+            visible={this.state.visible}
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+          >
+            <WrappedArticleForm
+              visible={this.state.visible}
+              params={this.state.params}
+              onSubmit={this.handleFormSubmit}
+              onCancel={this.handleCancel}
+            />
+          </Modal>
+        </div>
       </div>
     );
   }

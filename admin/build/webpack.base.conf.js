@@ -1,7 +1,9 @@
-'use strict'
-const path = require('path')
-const utils = require('./utils')
-const config = require('./baseconfig')
+
+
+const path = require('path');
+const utils = require('./utils');
+const config = require('./baseconfig');
+
 const resolve = utils.resolve;
 
 module.exports = {
@@ -32,11 +34,11 @@ module.exports = {
         loader: 'babel-loader'
       },
       {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        test: /\.(png|jpe?g|gif|svg|.ico)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+          name: utils.assetsPath('images/[name].[hash:7].[ext]')
         }
       },
       {
@@ -55,16 +57,6 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       },
-      // (config.dev.useEslint ? {
-      //   test: /(\.jsx|\.js)$/,
-      //   loader: 'eslint-loader',
-      //   enforce: 'pre',
-      //   include: [resolve('src'), resolve('test')],
-      //   options: {
-      //     formatter: require('eslint-friendly-formatter'),
-      //     emitWarning: !config.dev.showEslintErrorsInOverlay
-      //   }
-      // } : {})
     ]
   },
   node: {
@@ -75,4 +67,4 @@ module.exports = {
     tls: 'empty',
     child_process: 'empty'
   }
-}
+};

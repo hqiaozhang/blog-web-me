@@ -1,7 +1,6 @@
-const fetch = require('node-fetch');
-const CONFIG = require('../app.config.js');
+ 
 const User = require('../models/user');
-// const OAuth = require('../models/oauth');
+const Config = require('../models/config') 
 import { MD5_SUFFIX, responseClient, md5 } from '../util/util.js';
 const Funcmenu = require('../models/funcmenu');
 
@@ -40,6 +39,16 @@ exports.login = (req, res) => {
 // 菜单查询
 exports.getFuncMenu = (req, res) => {
   Funcmenu.find()
+    .then(data => {
+      if(data) {
+        responseClient(res, 200, 200, '查询成功', data);
+      }
+    })
+}
+
+// 项目配置查询
+exports.getConfig = (req, res) => {
+  Config.find()
     .then(data => {
       if(data) {
         responseClient(res, 200, 200, '查询成功', data);

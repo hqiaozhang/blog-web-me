@@ -4,7 +4,7 @@
  * @Email: 991034150@qq.com
  * @Description: reducers公用
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-09-26 16:40:08
+ * @Last Modified time: 2019-09-27 13:15:08
  */
 
 import * as types from '@/actions/types';
@@ -14,7 +14,9 @@ const token = getCookie('admin_token');
 const initialState = {
   logged: !!token,
   collapsed: false,
-  menuList: []
+  menuList: [],
+  activeMenu: '',
+  config: {}
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -26,6 +28,14 @@ export default function reducer(state = initialState, action = {}) {
     case types.GETFUNCMENUSUCCESS: // 左边菜单获取成功
       return Object.assign({}, state, {
         menuList: action.data,
+      });
+    case types.ACTIVEMENU: // 菜单当前选中项
+      return Object.assign({}, state, {
+        activeMenu: action.active,
+      });
+    case types.CONFIGSUCCESS: // 菜单当前选中项
+      return Object.assign({}, state, {
+        config: action.data,
       });
     default:
       return state;

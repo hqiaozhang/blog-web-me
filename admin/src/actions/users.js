@@ -4,7 +4,7 @@
  * @Email: 991034150@qq.com
  * @Description: 用户信息
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-09-26 15:12:07
+ * @Last Modified time: 2019-09-27 13:16:58
  */
 
 import {fetch} from '@/utils/request';
@@ -22,6 +22,13 @@ const funcMenuSuccess = (data) => ({
   data,
 });
 
+// 字典配置
+const getConfigSuccess = (data) => ({
+  type: types.CONFIGSUCCESS,
+  data,
+});
+
+
 // 登录
 export const rquestLogin = (pramas) => dispatch => fetch('fetchLogin', {...pramas}, (data) => {
   dispatch(LoginSuccess(data));
@@ -32,3 +39,7 @@ export const rquestFuncMenu = (pramas) => dispatch => fetch('fetchGetFuncMenu', 
   dispatch(funcMenuSuccess(data));
 });
 
+// 查询字典配置
+export const rquestAllConfig = (pramas) => dispatch => fetch('fetchGetConfig', {...pramas}, (data) => {
+  dispatch(getConfigSuccess(data));
+});
