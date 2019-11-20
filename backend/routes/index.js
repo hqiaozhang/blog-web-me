@@ -30,5 +30,9 @@ module.exports = app => {
 	app.post(`/${baseUrl}/project/add`, Project.addProject);
 	// 删除项目
 	app.post(`/${baseUrl}/project/del`, Project.deleteProject);
+	// 编辑项目
+	app.post(`/${baseUrl}/project/update`, Project.updateProject);
+	// 查询项目详情
+	app.get(`/${baseUrl}/project/detail`, Project.getProjectDetail);
 	
 };

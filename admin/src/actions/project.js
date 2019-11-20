@@ -4,7 +4,7 @@
  * @Email: 991034150@qq.com
  * @Description: 项目管理 actions
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-09-27 17:11:07
+ * @Last Modified time: 2019-11-20 16:11:20
  */
 
 
@@ -36,6 +36,12 @@ const projectUpdateSuccess = (data) => ({
   data,
 });
 
+// 详情查询成功
+const projectDetailSuccess = (data) => ({
+  type: types.PROJECTDETAILSUCCESS,
+  data,
+});
+
 // 新增项目
 export const rquestAddproject = (pramas) => dispatch => fetch('fetchProjectAdd', {...pramas}, (data) => {
   dispatch(projectAddSuccess(data));
@@ -46,13 +52,18 @@ export const rquestListproject = (pramas) => dispatch => fetch('fetchProjectList
   dispatch(projectListSuccess(data));
 });
 
-
 // 删除项目列表
 export const rquestDelproject = (pramas) => dispatch => fetch('fetchProjectDel', {...pramas}, (data) => {
   dispatch(projectDelSuccess(data));
 });
 
 // 编辑（更新）项目
-export const rquestUpdateproject = (pramas) => dispatch => fetch('fetchProjectUpdate', {...pramas}, (data) => {
+export const rquestUpdateProject = (pramas) => dispatch => fetch('fetchProjectUpdate', {...pramas}, (data) => {
   dispatch(projectUpdateSuccess(data));
 });
+
+// 查询详情
+export const rquestDetailproject = (pramas) => dispatch => fetch('fetchProjectDetail', {...pramas}, (data) => {
+  dispatch(projectDetailSuccess(data));
+});
+

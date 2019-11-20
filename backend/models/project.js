@@ -18,7 +18,7 @@ const projectSchema = new mongoose.Schema({
 
 	// 项目封面
 	img: { type: String, required: true },
-
+ 
 	// 项目链接
 	url: { type: String},
 

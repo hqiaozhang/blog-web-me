@@ -4,7 +4,7 @@
  * @Email: 991034150@qq.com
  * @Description: 项目管理
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-09-27 15:57:40
+ * @Last Modified time: 2019-11-20 17:17:22
  */
 
 import React, {Component} from 'react';
@@ -20,6 +20,7 @@ export default class Project extends Component {
         <Route path={`${match.path}`} exact component={ProjectList} />
         <Route path={`${match.path}/list`} exact component={ProjectList} />
         <Route path={`${match.path}/create`} exact component={ProjectCreate} />
+        <Route path={`${match.path}/create/:id`} component={ProjectCreate} />
       </Switch>
 
     );

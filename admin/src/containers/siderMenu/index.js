@@ -4,7 +4,7 @@
  * @Email: 991034150@qq.com
  * @Description: 左边导航
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-09-27 16:51:20
+ * @Last Modified time: 2019-11-20 14:41:25
  */
 
 import React, {Component} from 'react';
@@ -96,7 +96,7 @@ export default class SiderMenu extends Component {
     return (
       <div className="layout_sider" style={{width: collapsed ? 80 : 256}}>
         <div className="index-logo">
-          <NavLink to="/app"><h1 style={{display: collapsed ? 'none' : 'block'}}>react-blog</h1></NavLink>
+          <NavLink to="/app"><h1 style={{display: collapsed ? 'none' : 'block'}} /></NavLink>
         </div>
         {/* defaultOpenKeys={[this.state.defKey]}
           defaultSelectedKeys={[this.state.defKey]} */}

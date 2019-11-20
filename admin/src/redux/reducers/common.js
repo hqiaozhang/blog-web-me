@@ -4,7 +4,7 @@
  * @Email: 991034150@qq.com
  * @Description: reducers公用
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-09-27 13:15:08
+ * @Last Modified time: 2019-10-21 15:14:09
  */
 
 import * as types from '@/actions/types';
@@ -12,7 +12,8 @@ import {getCookie} from '@/utils/util';
 
 const token = getCookie('admin_token');
 const initialState = {
-  logged: !!token,
+  // logged: !!token,
+  logged: true,
   collapsed: false,
   menuList: [],
   activeMenu: '',

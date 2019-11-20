@@ -2,9 +2,9 @@
  * @Author: zhanghongqiao
  * @Date: 2019-09-24 17:46:21
  * @Email: 991034150@qq.com
- * @Description: 文章管理reducers
+ * @Description: 项目管理reducers
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-09-27 17:29:26
+ * @Last Modified time: 2019-11-20 16:11:38
  */
 
 
@@ -13,6 +13,7 @@ import * as types from '@/actions/types';
 const initialState = {
   projectList: [],
   status: 0,
+  detail: {}
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -31,6 +32,10 @@ export default function reducer(state = initialState, action = {}) {
     case types.UPDATEPROSTATUS:
       return Object.assign({}, state, {
         status: action.code
+      });
+    case types.PROJECTDETAILSUCCESS: // 查询详情
+      return Object.assign({}, state, {
+        detail: action.data
       });
     default:
       return state;

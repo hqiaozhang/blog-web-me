@@ -24,9 +24,13 @@
     text-align: right;
     color: #fff;
     width: 100%;
+    display: none; 
     i {
       margin-right: 20px;
     }
+  }
+  .ant-card-hoverable:hover .operation {
+    display: inline-block;
   }
 }
 

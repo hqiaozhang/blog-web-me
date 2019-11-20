@@ -4,7 +4,7 @@
  * @Email: 991034150@qq.com 
  * @Description: 项目管理
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-09-27 18:06:05
+ * @Last Modified time: 2019-11-20 17:03:05
  */
 
 const Project = require('../models/project'); 
@@ -53,7 +53,7 @@ exports.addProject = (req, res) => {
 // 删除项目
 exports.deleteProject = (req, res) => {
   let { id } = req.body;
-  Article.deleteMany({ _id: id })
+  Project.deleteMany({ _id: id })
     .then(result => {
       if (result.n === 1) {
         responseClient(res, 200, rescode.success, '删除成功!');
@@ -66,3 +66,53 @@ exports.deleteProject = (req, res) => {
       responseClient(res);
     });
 }
+
+
+
+// 更新项目
+exports.updateProject = (req, res) => {
+  const {
+    title,
+    content,
+    img,
+    category,
+    url,
+    id,
+  } = req.body; 
+  Project.update(
+    { _id: id },
+    {
+      title,
+      content,
+      img,
+      url,
+      category,
+    },
+  )
+    .then(data => { 
+      console.log('data', data.n)
+      if (data.n === 1) {
+        responseClient(res, 200, rescode.success, '操作成功', '更新成功');
+      } else {
+        responseClient(res, 200, rescode.error, '更新失败');
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      responseClient(res);
+    });
+};
+
+
+// 查询详情
+exports.getProjectDetail = (req, res) => {
+  let { id } = req.query;  
+  Project.findOne({ _id: id })
+    .then(data => { 
+      responseClient(res, 200, rescode.success, '操作成功！', data);
+    })
+    .catch(err => {
+      console.error('err :', err);
+      responseClient(res);
+    });
+};

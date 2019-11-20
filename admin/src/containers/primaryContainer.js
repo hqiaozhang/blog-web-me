@@ -4,7 +4,7 @@
  * @Email: 991034150@qq.com
  * @Description: 主布局页面
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-09-27 15:52:54
+ * @Last Modified time: 2019-11-20 14:38:25
  */
 
 
@@ -20,6 +20,8 @@ import Home from '@/containers/home';
 import ArticlesList from '@/containers/articles/list';
 // 项目管理
 import Project from '@/containers/project';
+// 地图
+import OlMap from '@/containers/olMap';
 
 const mapStateToProps = ({common}) => ({
   collapsed: common.collapsed
@@ -28,20 +30,21 @@ const mapStateToProps = ({common}) => ({
 class PrimaryContainer extends Component {
   render() {
     const {match, history} = this.props;
-
+    console.log('match', match);
     return (
-      <Layout className="ant-layout main_container">
+      <Layout className="main_container">
         <aside className="layout_sider">
           <SiderMenu history={history} match={match} />
         </aside>
         <section className={this.props.collapsed ? 'left_collapsed right_layout' : 'right_layout'}>
-          <Header />
+          {/* <Header /> */}
           <div className="index_content">
             <div className="right_content_main">
               <Switch>
                 <Route path={`${match.path}`} exact component={Home} />
                 <Route path={`${match.path}/article`} component={ArticlesList} />
                 <Route path={`${match.path}/project`} component={Project} />
+                <Route path={`${match.path}/ol`} component={OlMap} />
               </Switch>
             </div>
           </div>
