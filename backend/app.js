@@ -5,7 +5,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
-
+const bodyParser = require("body-parser");
 // import 等语法要用到 babel 支持
 require('babel-register');
 
@@ -16,7 +16,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
-app.use(express.json());
+/* 以application/json格式解析数据 */
+app.use(bodyParser.json());
+// app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser('blog_node_cookie'));
@@ -29,6 +31,8 @@ app.use(
 		cookie: { maxAge: 60 * 1000 * 30, httpOnly: true }, //过期时间
 	}),
 );
+
+app.use('/serverImage', express.static(path.join(__dirname, 'serverImage')));
 
 const mongodb = require('./core/mongodb');
 

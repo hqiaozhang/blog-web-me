@@ -75,7 +75,8 @@ export default class ProjectList extends Component {
                       </Popconfirm>
                       <Icon onClick={this.handleEdit.bind(this, item)} type="edit" />
                     </div>
-                    <div className="ant-card-cover"><img src={`/static/images/projects/${item.img}.png`} /></div>
+                    <div className="ant-card-cover"><img src={item.imgUrl} /></div>
+                    {/* <div className="ant-card-cover"><img src={`/static/images/projects/${item.img}.png`} /></div> */}
                     <div className="ant-card-body" onClick={this.handleOpenHref.bind(this, item)}>
                       <div className="ant-card-meta"><div className="ant-card-meta-detail">
                         <div className="ant-card-meta-title"><a>{item.title}</a></div>

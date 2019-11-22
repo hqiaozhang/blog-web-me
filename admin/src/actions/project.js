@@ -4,13 +4,12 @@
  * @Email: 991034150@qq.com
  * @Description: 项目管理 actions
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-11-20 16:11:20
+ * @Last Modified time: 2019-11-22 15:07:29
  */
 
 
 import {fetch} from '@/utils/request';
 import * as types from './types';
-
 
 // 新增项目成功
 const projectAddSuccess = (data) => ({
@@ -42,6 +41,12 @@ const projectDetailSuccess = (data) => ({
   data,
 });
 
+// 图片上传成功
+const projectUploadImgSuccess = (data) => ({
+  type: types.PROJECTUPLOADIMGSUCCESS,
+  data
+});
+
 // 新增项目
 export const rquestAddproject = (pramas) => dispatch => fetch('fetchProjectAdd', {...pramas}, (data) => {
   dispatch(projectAddSuccess(data));
@@ -67,3 +72,7 @@ export const rquestDetailproject = (pramas) => dispatch => fetch('fetchProjectDe
   dispatch(projectDetailSuccess(data));
 });
 
+// 图上上传
+export const requestUploadimgProject = (pramas) => dispatch => fetch('fetchProjectImgUpload', {...pramas}, (data) => {
+  dispatch(projectUploadImgSuccess(data));
+});

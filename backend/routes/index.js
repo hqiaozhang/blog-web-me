@@ -34,5 +34,7 @@ module.exports = app => {
 	app.post(`/${baseUrl}/project/update`, Project.updateProject);
 	// 查询项目详情
 	app.get(`/${baseUrl}/project/detail`, Project.getProjectDetail);
+	// 项目图片上传
+	app.post(`/${baseUrl}/project/uploadImg`, Project.uploadProjectImg)
 	
 };

@@ -4,7 +4,7 @@
  * @Email: 991034150@qq.com 
  * @Description: 项目管理
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-11-20 17:03:05
+ * @Last Modified time: 2019-11-22 14:33:40
  */
 
 const Project = require('../models/project'); 
@@ -31,13 +31,13 @@ exports.addProject = (req, res) => {
   const {
     title,
     content,
-    img,
+    imgUrl,
     category,
   } = req.body;
   let tempProject = new Project({
     title,
     content,
-    img,
+    imgUrl,
     category,
   })
   // 每个 document 会在调用他的 save 方法后保存到数据库
@@ -74,7 +74,7 @@ exports.updateProject = (req, res) => {
   const {
     title,
     content,
-    img,
+    imgUrl,
     category,
     url,
     id,
@@ -84,13 +84,12 @@ exports.updateProject = (req, res) => {
     {
       title,
       content,
-      img,
+      imgUrl,
       url,
       category,
     },
   )
-    .then(data => { 
-      console.log('data', data.n)
+    .then(data => {  
       if (data.n === 1) {
         responseClient(res, 200, rescode.success, '操作成功', '更新成功');
       } else {
@@ -116,3 +115,9 @@ exports.getProjectDetail = (req, res) => {
       responseClient(res);
     });
 };
+
+// 上传图片
+const uploadImg = require('./uploadImg');
+exports.uploadProjectImg = (req, res) => { 
+  uploadImg(req, res)
+}

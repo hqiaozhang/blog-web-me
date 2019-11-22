@@ -4,7 +4,7 @@
  * @Email: 991034150@qq.com
  * @Description: 项目管理
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-09-29 13:37:14
+ * @Last Modified time: 2019-11-22 13:44:15
  */
 
 
@@ -48,11 +48,22 @@ const fetchProjectUpdate = {
   }
 };
 
+// 图片上传
+const fetchProjectImgUpload = {
+  url: '/project/uploadImg',
+  config: {
+    method: 'POST',
+    contentType: 'multipart/form-data',
+    // isMsg: true
+  }
+};
+
 
 export {
   fetchProjectList,
   fetchProjectAdd,
   fetchProjectDel,
   fetchProjectUpdate,
-  fetchProjectDetail
+  fetchProjectDetail,
+  fetchProjectImgUpload
 };

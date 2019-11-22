@@ -4,7 +4,7 @@
  * @Email: 991034150@qq.com
  * @Description: 项目管理reducers
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-11-20 16:11:38
+ * @Last Modified time: 2019-11-22 14:57:18
  */
 
 
@@ -13,6 +13,7 @@ import * as types from '@/actions/types';
 const initialState = {
   projectList: [],
   status: 0,
+  imageurl: '',
   detail: {}
 };
 
@@ -36,6 +37,10 @@ export default function reducer(state = initialState, action = {}) {
     case types.PROJECTDETAILSUCCESS: // 查询详情
       return Object.assign({}, state, {
         detail: action.data
+      });
+    case types.PROJECTUPLOADIMGSUCCESS: // 图片上传成功
+      return Object.assign({}, state, {
+        imageurl: action.data.url
       });
     default:
       return state;

@@ -4,22 +4,22 @@
  * @Email: 991034150@qq.com
  * @Description: 创建项目
  * @Last Modified by: zhanghongqiao
- * @Last Modified time: 2019-11-20 17:40:34
+ * @Last Modified time: 2019-11-22 14:54:49
  */
 
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
-
-
 import {Form, Select, Input, Button, Row, Col, message} from 'antd';
 import {rquestAddproject, rquestDetailproject, rquestUpdateProject} from '@/actions/project';
 import {rquestAllConfig} from '@/actions/users';
+import Avatar from './uploadButton';
 
 const {Option} = Select;
 const mapStateToProps = ({common, project}) => ({
   ptype: common.config[0] ? common.config[0].project : [],
   status: project.status,
-  detail: project.detail
+  detail: project.detail,
+  imageUrl: project.imageUrl
 });
 
 @connect(mapStateToProps)
@@ -58,20 +58,30 @@ class ProjectCreate extends React.Component {
     }
   }
   componentWillReceiveProps(nextProps) {
+    const {id} = this.props.match.params;
     if (this.props.status !== nextProps.status && nextProps.status === 200) {
-      message.info('项目新增成功');
+      if (id) {
+        message.info('更新成功');
+      } else {
+        message.info('新增成功');
+      }
       this.props.dispatch({type: 'UPDATEPROSTATUS', code: 0});
       this.handleRest();
       this.handleBack();
     }
     // 编辑的时候才赋值
-    if (this.props.detail !== nextProps.detail && this.props.match.params.id) {
+    if (this.props.detail !== nextProps.detail && id) {
       this.props.form.setFieldsValue({
         title: nextProps.detail.title,
         content: nextProps.detail.content,
         url: nextProps.detail.url,
-        img: nextProps.detail.img,
+        // imgUrl: nextProps.detail.imgUrl,
         category: nextProps.detail.category
+      });
+    }
+    if (this.props.imageUrl !== nextProps.imageUrl) {
+      this.props.form.setFieldsValue({
+        imgUrl: nextProps.imageUrl
       });
     }
   }
@@ -95,11 +105,12 @@ class ProjectCreate extends React.Component {
               rules: [{required: true, message: '请输入项目地址'}],
             })(<Input placeholder="请输入项目地址" />)}
           </Form.Item>
-          <Form.Item label="图片名称">
+          {/* <Form.Item label="上传图片">
             {getFieldDecorator('img', {
               rules: [{required: true, message: '请输入图片名称'}],
             })(<Input placeholder="请输入图片名称" />)}
-          </Form.Item>
+          </Form.Item> */}
+
           <Form.Item label="所属类别">
             {getFieldDecorator('category', {
               rules: [{required: true, message: '请选择所属类别!'}],
@@ -112,6 +123,11 @@ class ProjectCreate extends React.Component {
                 ))
               }
             </Select>)}
+          </Form.Item>
+          <Form.Item label="上传图片">
+            {getFieldDecorator('imgUrl', {
+              rules: [{required: true, message: '请上传图片'}],
+            })(<Avatar imgurl={this.props.detail.imgUrl} />)}
           </Form.Item>
           <Row
             type="flex"
